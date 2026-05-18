@@ -23,7 +23,7 @@ export default function About() {
           <h1 className="page-title">Hi, I'm Jaclyn!</h1>
           <p className="page-lede">
             Owner &amp; Pet Groomer at Cozy K9 Shack — Fear Free &amp; CPR certified,
-            and proud dog mom of nine.
+            and proud dog mom.
           </p>
         </div>
       </section>
@@ -42,7 +42,7 @@ export default function About() {
           <div className="about-page-content">
             <p>
               Dogs have always been at the center of my life — both personally and
-              professionally. I'm the proud owner of <strong>nine dogs and two cats</strong>,
+              professionally. I'm the proud owner of <strong>both dogs and cats</strong>,
               and I'm actively involved in AKC conformation showing, which has
               given me a deep appreciation for breed standards, structure, coat
               care, and overall canine health.
