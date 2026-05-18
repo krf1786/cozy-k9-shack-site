@@ -1,9 +1,10 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 
-import Header   from './components/Header.jsx'
-import Footer   from './components/Footer.jsx'
-import CtaBanner from './components/CtaBanner.jsx'
+import Header     from './components/Header.jsx'
+import Footer     from './components/Footer.jsx'
+import CtaBanner  from './components/CtaBanner.jsx'
+import WalkingDog from './components/WalkingDog.jsx'
 
 import Home     from './pages/Home.jsx'
 import Services from './pages/Services.jsx'
@@ -23,6 +24,7 @@ function Layout() {
 
   return (
     <>
+      <WalkingDog />
       <Header />
       <main>
         <Routes>

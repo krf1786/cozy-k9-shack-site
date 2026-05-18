@@ -115,6 +115,186 @@ img { max-width: 100%; display: block; }
 }
 .btn-white:hover { background: var(--cream); transform: translateY(-1px); }
 
+/* ── Walking Dog Strip ────────────────────────────────────── */
+.walking-dog-strip {
+  position: relative;
+  height: 64px;
+  background: linear-gradient(180deg, var(--sage-pale) 0%, var(--blush-pale) 100%);
+  border-bottom: 1px solid var(--gray-light);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.walking-dog {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 95px;
+  height: 52px;
+  animation: dog-walk 14s linear infinite, dog-bob .35s ease-in-out infinite;
+  will-change: transform;
+}
+
+.walking-dog .dog-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Dirty → Clean crossfade timed to walk animation */
+.dog-dirty {
+  animation: dog-dirty-fade 14s linear infinite;
+}
+.dog-clean {
+  animation: dog-clean-fade 14s linear infinite;
+}
+
+@keyframes dog-dirty-fade {
+  0%, 40%   { opacity: 1; }
+  55%, 100% { opacity: 0; }
+}
+
+@keyframes dog-clean-fade {
+  0%, 45%   { opacity: 0; }
+  60%, 100% { opacity: 1; }
+}
+
+/* Bath bubble zone — centered in the strip */
+.bubble-zone {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 100%;
+  pointer-events: none;
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 30%,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(225, 240, 250, 0.55) 50%,
+    rgba(190, 215, 235, 0.25) 100%);
+  border: 1px solid rgba(140, 180, 210, 0.5);
+  box-shadow:
+    inset -1px -1.5px 2px rgba(120, 160, 195, 0.18),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.7);
+  opacity: 0;
+  animation: bubble-rise 2.8s ease-in infinite;
+}
+
+/* soft white highlight on each bubble */
+.bubble::after {
+  content: '';
+  position: absolute;
+  top: 18%;
+  left: 22%;
+  width: 28%;
+  height: 28%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  filter: blur(.6px);
+}
+
+.bubble-1 { left:   6px; width: 16px; height: 16px; animation-delay: 0s;   animation-duration: 2.8s; }
+.bubble-2 { left:  28px; width: 22px; height: 22px; animation-delay: .3s;  animation-duration: 3.1s; }
+.bubble-3 { left:  56px; width: 13px; height: 13px; animation-delay: .6s;  animation-duration: 2.6s; }
+.bubble-4 { left:  82px; width: 20px; height: 20px; animation-delay: .9s;  animation-duration: 3s;   }
+.bubble-5 { left: 116px; width: 14px; height: 14px; animation-delay: 1.2s; animation-duration: 2.7s; }
+.bubble-6 { left:  18px; width: 11px; height: 11px; animation-delay: 1.5s; animation-duration: 2.5s; }
+.bubble-7 { left:  68px; width: 17px; height: 17px; animation-delay: 1.8s; animation-duration: 2.9s; }
+.bubble-8 { left: 100px; width: 13px; height: 13px; animation-delay: 2.1s; animation-duration: 2.7s; }
+
+@keyframes bubble-rise {
+  0%   { bottom: -16px; opacity: 0; transform: translateX(0); }
+  10%  { opacity: 1;   }
+  50%  { transform: translateX(-3px); }
+  80%  { opacity: .95; }
+  100% { bottom: 66px;  opacity: 0; transform: translateX(2px); }
+}
+
+/* Sparkle twinkle (clean dog) */
+.sparkle {
+  animation: sparkle-twinkle 1.4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.sparkle-1 { animation-delay: 0s;  }
+.sparkle-2 { animation-delay: .4s; }
+.sparkle-3 { animation-delay: .8s; }
+
+@keyframes sparkle-twinkle {
+  0%, 100% { opacity: 0; transform: scale(.6); }
+  50%      { opacity: 1; transform: scale(1.2); }
+}
+
+/* Tail wag — rotates around its base */
+.dog-tail {
+  transform-origin: 22px 28px;
+  animation: tail-wag .28s ease-in-out infinite;
+}
+
+/* Ear flop */
+.dog-ear {
+  transform-origin: 84px 18px;
+  animation: ear-flop .35s ease-in-out infinite;
+}
+
+/* Legs — alternating step */
+.dog-leg-back-1, .dog-leg-front-2 {
+  transform-origin: center top;
+  animation: leg-step-a .35s ease-in-out infinite;
+}
+.dog-leg-back-2, .dog-leg-front-1 {
+  transform-origin: center top;
+  animation: leg-step-b .35s ease-in-out infinite;
+}
+
+@keyframes dog-walk {
+  0%   { transform: translateX(-80px); }
+  100% { transform: translateX(calc(100vw + 20px)); }
+}
+
+@keyframes dog-bob {
+  0%, 100% { margin-bottom: 0; }
+  50%      { margin-bottom: 2px; }
+}
+
+@keyframes tail-wag {
+  0%, 100% { transform: rotate(-15deg); }
+  50%      { transform: rotate(25deg); }
+}
+
+@keyframes ear-flop {
+  0%, 100% { transform: rotate(-5deg); }
+  50%      { transform: rotate(10deg); }
+}
+
+@keyframes leg-step-a {
+  0%, 100% { transform: rotate(-20deg); }
+  50%      { transform: rotate(20deg); }
+}
+
+@keyframes leg-step-b {
+  0%, 100% { transform: rotate(20deg); }
+  50%      { transform: rotate(-20deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .walking-dog,
+  .dog-tail,
+  .dog-ear,
+  .dog-leg-back-1, .dog-leg-back-2,
+  .dog-leg-front-1, .dog-leg-front-2 {
+    animation: none;
+  }
+  .walking-dog { left: 16px; }
+}
+
 /* ── Header ───────────────────────────────────────────────── */
 .header {
   position: sticky;
@@ -353,6 +533,7 @@ img { max-width: 100%; display: block; }
 
 .hero-image-frame {
   position: relative;
+  width: 100%;
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-md);
@@ -365,6 +546,86 @@ img { max-width: 100%; display: block; }
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* Slideshow — slides stacked via CSS grid, crossfaded via opacity */
+.hero-slideshow {
+  display: grid;
+  grid-template-areas: "stack";
+}
+
+.hero-slide {
+  grid-area: stack;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity .9s ease-in-out;
+  pointer-events: none;
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* "Before" / "After" label */
+.hero-slide-label {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(255, 255, 255, .9);
+  backdrop-filter: blur(4px);
+  color: var(--charcoal);
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 6px 14px;
+  border-radius: 50px;
+  box-shadow: var(--shadow-sm);
+  letter-spacing: .02em;
+  z-index: 2;
+  animation: hero-label-pop .5s ease-out;
+}
+
+@keyframes hero-label-pop {
+  0%   { opacity: 0; transform: translateY(-8px) scale(.92); }
+  100% { opacity: 1; transform: translateY(0)     scale(1); }
+}
+
+/* Dot indicators */
+.hero-slide-dots {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, .55);
+  backdrop-filter: blur(6px);
+  border-radius: 50px;
+}
+
+.hero-slide-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .6);
+  border: 1.5px solid rgba(58, 58, 58, .35);
+  padding: 0;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.hero-slide-dot:hover { background: rgba(255, 255, 255, .9); }
+
+.hero-slide-dot.is-active {
+  background: var(--sage);
+  border-color: var(--sage-deep);
+  width: 22px;
+  border-radius: 5px;
 }
 
 .hero-badge-card {
