@@ -9,7 +9,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="footer-brand-col">
             <div className="footer-logo">
-              <img src="/logo.png" alt="Cozy K9 Shack logo" className="footer-logo-badge" />
+              <img src="/logo.jpg" alt="Cozy K9 Shack logo" className="footer-logo-badge" />
               <div className="footer-logo-text">
                 <div className="footer-brand-name">COZY K9 SHACK</div>
                 <div className="footer-brand-sub">In-Home Pet Grooming</div>

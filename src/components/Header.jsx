@@ -16,7 +16,7 @@ export default function Header() {
     <header className="header">
       <div className="container header-inner">
         <Link to="/" className="logo" onClick={() => setOpen(false)}>
-          <img src="/logo.png" alt="Cozy K9 Shack logo" className="logo-badge-img" />
+          <img src="/logo.jpg" alt="Cozy K9 Shack logo" className="logo-badge-img" />
           <div className="logo-text">
             <div className="logo-name">COZY K9 SHACK</div>
             <div className="logo-tagline">In-Home Pet Grooming</div>
