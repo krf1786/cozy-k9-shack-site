@@ -49,7 +49,7 @@ export default function About() {
             </p>
 
             <p>
-              In 2022, I was honored to be voted <strong>Best Groomer in Charlotte.</strong>
+              In 2022, I was honored to be voted <strong>"Best Groomer in Charlotte."</strong>
               {' '}
             </p>
 
