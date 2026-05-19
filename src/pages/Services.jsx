@@ -45,7 +45,7 @@ export default function Services() {
           <h1 className="page-title">Gentle Grooming, Tailored to Your Pup</h1>
           <p className="page-lede">
             Every visit is unhurried, one-on-one, and designed around your dog's
-            individual needs. Here's what we offer.
+            individual needs.<br />Here's what we offer.
           </p>
         </div>
       </section>
@@ -111,8 +111,8 @@ export default function Services() {
         <div className="container" style={{ textAlign: 'center' }}>
           <h2 className="section-title">See Pricing by Size</h2>
           <p style={{ color: 'var(--gray)', maxWidth: 540, margin: '0 auto 28px', lineHeight: 1.7 }}>
-            Pricing varies by your dog's size, coat condition, and any add-ons.
-            See full starting prices on the Pricing page.
+            Pricing varies by your dog's size, coat condition, and any add-ons.<br />
+            See full starting prices on the Pricing Page.
           </p>
           <Link to="/pricing" className="btn btn-sage">View Pricing →</Link>
         </div>

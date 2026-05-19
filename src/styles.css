@@ -309,7 +309,7 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 80px;
+  height: 100px;
 }
 
 .logo {
@@ -320,8 +320,8 @@ img { max-width: 100%; display: block; }
 }
 
 .logo-badge-img {
-  width: 62px;
-  height: 62px;
+  width: 84px;
+  height: 84px;
   border-radius: 50%;
   object-fit: contain;
   flex-shrink: 0;
@@ -340,7 +340,7 @@ img { max-width: 100%; display: block; }
 .logo-tagline {
   font-size: .65rem;
   color: var(--gray);
-  letter-spacing: .14em;
+  letter-spacing: .305em;
   text-transform: uppercase;
 }
 
@@ -630,7 +630,7 @@ img { max-width: 100%; display: block; }
 
 .hero-badge-card {
   position: absolute;
-  top: 18px;
+  top: -18px;
   right: -10px;
   background: var(--white);
   border-radius: 12px;
@@ -831,7 +831,7 @@ img { max-width: 100%; display: block; }
   object-fit: cover;
   object-position: top center;
   border-radius: 50%;
-  border: 5px solid var(--white);
+  border: 5px solid var(--sage);
   box-shadow: 0 8px 28px rgba(0,0,0,.13);
 }
 
@@ -1264,9 +1264,9 @@ img { max-width: 100%; display: block; }
 
 .note-card {
   background: var(--sage-pale);
-  border-left: 4px solid var(--sage);
-  border-radius: 10px;
-  padding: 16px 20px;
+  border: 2px solid var(--sage);
+  border-radius: 999px;
+  padding: 14px 24px;
   font-size: .9rem;
   color: var(--charcoal);
   line-height: 1.7;
@@ -1303,7 +1303,7 @@ img { max-width: 100%; display: block; }
   object-fit: cover;
   object-position: top center;
   border-radius: 50%;
-  border: 6px solid var(--white);
+  border: 6px solid var(--sage);
   box-shadow: 0 8px 28px rgba(0,0,0,.13);
 }
 
@@ -1367,7 +1367,7 @@ img { max-width: 100%; display: block; }
   box-shadow: var(--shadow-sm);
   overflow: hidden;
   border: 1px solid var(--gray-light);
-  margin-bottom: 56px;
+  margin-bottom: 32px;
 }
 
 .pricing-table {
@@ -1425,7 +1425,7 @@ img { max-width: 100%; display: block; }
   background: var(--cream);
   border-radius: var(--radius-lg);
   padding: 32px 28px;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
   border: 1px solid var(--gray-light);
 }
 
@@ -1435,9 +1435,11 @@ img { max-width: 100%; display: block; }
   gap: 10px;
 }
 
+/* Each row uses a 2-column grid so prices align vertically across rows
+   instead of being shoved to the right edge by flex space-between. */
 .addon-row {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 140px;
   align-items: center;
   background: var(--white);
   padding: 16px 20px;
@@ -1447,12 +1449,12 @@ img { max-width: 100%; display: block; }
 
 .addon-name { font-weight: 600; color: var(--charcoal); font-size: .95rem; }
 .addon-note { font-size: .78rem; color: var(--gray); margin-top: 2px; }
-.addon-price { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+.addon-price { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
 
 .pricing-notes {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 @media (max-width: 640px) {

@@ -58,7 +58,7 @@ export default function Pricing() {
           <span className="section-label">Pricing</span>
           <h1 className="page-title">Starting Prices &amp; What's Included</h1>
           <p className="page-lede">
-            Every groom includes a bath &amp; blow dry, nail dremel, ear cleaning,
+            Every groom includes a bath &amp; blow dry, nail dremel, ear cleaning,<br />
             and a deshedding bath — no surprise fees for the basics.
           </p>
         </div>

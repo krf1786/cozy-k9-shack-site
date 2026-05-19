@@ -22,7 +22,7 @@ export default function About() {
           <span className="section-label">Meet Your Groomer</span>
           <h1 className="page-title">Hi, I'm Jaclyn!</h1>
           <p className="page-lede">
-            Owner &amp; Pet Groomer at Cozy K9 Shack — Fear Free &amp; CPR certified,
+            Owner &amp; Pet Groomer at Cozy K9 Shack — Fear Free &amp; CPR Certified,<br />
             and proud dog mom.
           </p>
         </div>
@@ -49,7 +49,7 @@ export default function About() {
             </p>
 
             <p>
-              In 2022, I was honored to be voted <strong>Best Groomer in Charlotte</strong>
+              In 2022, I was honored to be voted <strong>"Best Groomer in Charlotte"</strong>
               {' '}— a recognition that means so much to me because it reflects the
               trust and support of my community and clients.
             </p>
@@ -57,7 +57,7 @@ export default function About() {
             <p>
               Grooming, to me, is more than haircuts and baths — it's about trust,
               patience, and creating a safe space where dogs feel comfortable being
-              themselves. I'm <strong>Fear Free</strong> and <strong>CPR certified</strong>,
+              themselves. I'm <strong>Fear Free</strong> and <strong>CPR Certified</strong>,
               and I take pride in working at each dog's pace, whether it's a wiggly
               puppy experiencing grooming for the first time or a senior dog who
               needs a little extra care.

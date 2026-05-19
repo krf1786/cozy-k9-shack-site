@@ -1,11 +1,4 @@
-import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-
-const heroSlides = [
-  { src: '/hero-dog.png',    alt: 'Happy groomed dog',     label: null     },
-  { src: '/hero-before.jpg', alt: 'Dog before grooming',   label: 'Before' },
-  { src: '/hero-after.jpg',  alt: 'Same dog after grooming', label: 'After' },
-]
 
 const services = [
   { icon: '🛁', title: 'Bath & Brush', desc: "Relaxing bath, gentle shampoo, conditioning, blow-dry and brush-out." },
@@ -26,50 +19,6 @@ const testimonials = [
   { stars: 5, text: '"So convenient having grooming come to our home. Jaclyn is kind, patient, and truly loves what she does."', name: '— Amanda K.' },
   { stars: 5, text: '"The best groomer we\'ve ever had! Personalized care and such a calm experience for our pup."', name: '— Tyler S.' },
 ]
-
-function HeroSlideshow() {
-  const [index, setIndex] = useState(0)
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setIndex((i) => (i + 1) % heroSlides.length)
-    }, 4500)
-    return () => clearInterval(id)
-  }, [])
-
-  return (
-    <div className="hero-image-frame hero-slideshow">
-      {heroSlides.map((slide, i) => (
-        <img
-          key={slide.src}
-          src={slide.src}
-          alt={slide.alt}
-          className={`hero-dog-photo hero-slide${i === index ? ' is-active' : ''}`}
-        />
-      ))}
-
-      {heroSlides[index].label && (
-        <span className="hero-slide-label" key={`label-${index}`}>
-          {heroSlides[index].label}
-        </span>
-      )}
-
-      <div className="hero-slide-dots" role="tablist" aria-label="Slideshow navigation">
-        {heroSlides.map((_, i) => (
-          <button
-            key={i}
-            type="button"
-            role="tab"
-            aria-selected={i === index}
-            aria-label={`Show slide ${i + 1}`}
-            className={`hero-slide-dot${i === index ? ' is-active' : ''}`}
-            onClick={() => setIndex(i)}
-          />
-        ))}
-      </div>
-    </div>
-  )
-}
 
 function Hero() {
   return (
@@ -110,7 +59,9 @@ function Hero() {
         </div>
 
         <div className="hero-image-wrap">
-          <HeroSlideshow />
+          <div className="hero-image-frame">
+            <img src="/hero-dog.png" alt="Happy groomed dog" className="hero-dog-photo" />
+          </div>
           <div className="hero-badge-card" aria-hidden="true">
             <div className="hero-badge-card-icon">🐾</div>
             <div className="hero-badge-card-text">happy clean<br />tail wags</div>
@@ -186,13 +137,16 @@ function AboutPreview() {
           <div className="about-role">Owner, Pet Groomer · Fear Free &amp; CPR Certified</div>
 
           <p>
-            Dogs have always been at the center of my life — both personally and professionally.
-            I'm the proud owner of nine dogs and two cats, and I'm actively involved in
-            AKC conformation showing.
+            Dogs have always been at the center of my life — both personally and
+            professionally. I'm the proud owner of a few wonderful dogs and a
+            purrrrfectly beautiful cat, and I'm actively involved in AKC
+            Conformation Showing.
           </p>
           <p>
-            In 2022, I was honored to be voted <strong>Best Groomer in Charlotte</strong>.
-            Every dog that comes into my care is treated like my own.
+            In 2022, I was honored to be voted <strong>"Best Groomer"</strong> in Charlotte.
+          </p>
+          <p>
+            Every dog that comes into my care is treated like one of my own!
           </p>
 
           <div className="about-cta">
