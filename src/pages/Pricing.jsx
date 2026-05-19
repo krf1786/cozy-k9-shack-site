@@ -130,11 +130,11 @@ export default function Pricing() {
             <div className="note-card">
               <strong>📝 Please note:</strong> Prices listed are starting points
               and may vary based on your dog's coat condition and behavior.
-              Appointment duration may vary as well, and additional charges may
+              Appointment duration may vary as well, additional charges may
               apply. If you have any questions, please feel free to reach out.
             </div>
             <div className="note-card">
-              <strong>💳 Accepted payment methods:</strong> card, cash, Venmo, and Zelle.
+              <strong>💳 Accepted payment methods:</strong> Card, Cash, Venmo, and Zelle.
             </div>
           </div>
         </div>

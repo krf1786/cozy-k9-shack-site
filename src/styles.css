@@ -1273,6 +1273,17 @@ img { max-width: 100%; display: block; }
   margin-top: 18px;
 }
 
+/* On narrow screens the longer notes wrap to multiple lines; the pill
+   radius (999px) then equals half the card height and the curved ends
+   start clipping into the text. Switch to a softer corner so the text
+   keeps clearance from the border. */
+@media (max-width: 720px) {
+  .note-card {
+    border-radius: 18px;
+    padding: 14px 18px;
+  }
+}
+
 @media (max-width: 820px) {
   .included-grid { grid-template-columns: 1fr; gap: 40px; }
 }
