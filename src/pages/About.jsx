@@ -41,32 +41,20 @@ export default function About() {
 
           <div className="about-page-content">
             <p>
-              Dogs have always been at the center of my life — both personally and
-              professionally. I'm the proud owner of <strong>both dogs and cats</strong>,
-              and I'm actively involved in AKC conformation showing, which has
-              given me a deep appreciation for breed standards, structure, coat
-              care, and overall canine health.
+              Dogs have always been at the center of my
+              life — both personally and professionally. I’m
+              the proud owner of a few wonderful dogs and
+              a <strong>purrrrfectly</strong>beautiful cat, and I’m actively
+              involved in AKC Conformation Showing.
             </p>
 
             <p>
-              In 2022, I was honored to be voted <strong>"Best Groomer in Charlotte"</strong>
-              {' '}— a recognition that means so much to me because it reflects the
-              trust and support of my community and clients.
+              In 2022, I was honored to be voted <strong>Best Groomer in Charlotte.</strong>
+              {' '}
             </p>
 
             <p>
-              Grooming, to me, is more than haircuts and baths — it's about trust,
-              patience, and creating a safe space where dogs feel comfortable being
-              themselves. I'm <strong>Fear Free</strong> and <strong>CPR Certified</strong>,
-              and I take pride in working at each dog's pace, whether it's a wiggly
-              puppy experiencing grooming for the first time or a senior dog who
-              needs a little extra care.
-            </p>
-
-            <p>
-              Every dog that comes into my care is treated like my own. My goal is
-              always the same: a gentle experience, a happy dog, and an owner who
-              feels confident knowing their pup was cared for with compassion and love.
+              Every dog that comes into my care is treated like my own. 
             </p>
           </div>
         </div>

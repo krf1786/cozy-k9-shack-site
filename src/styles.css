@@ -1367,7 +1367,7 @@ img { max-width: 100%; display: block; }
   box-shadow: var(--shadow-sm);
   overflow: hidden;
   border: 1px solid var(--gray-light);
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 }
 
 .pricing-table {
@@ -1424,8 +1424,8 @@ img { max-width: 100%; display: block; }
 .addon-grid {
   background: var(--cream);
   border-radius: var(--radius-lg);
-  padding: 32px 28px;
-  margin-bottom: 24px;
+  padding: 24px 28px;
+  margin-bottom: 16px;
   border: 1px solid var(--gray-light);
 }
 
@@ -1454,8 +1454,10 @@ img { max-width: 100%; display: block; }
 .pricing-notes {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
+
+.pricing-notes .note-card { margin-top: 0; }
 
 @media (max-width: 640px) {
   .pricing-table th, .pricing-table td { padding: 12px 14px; font-size: .85rem; }
