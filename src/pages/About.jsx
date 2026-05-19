@@ -44,7 +44,7 @@ export default function About() {
               Dogs have always been at the center of my
               life — both personally and professionally. I’m
               the proud owner of a few wonderful dogs and
-              a <strong>purrrrfectly</strong>beautiful cat, and I’m actively
+              a <strong>purrrrfectly</strong> beautiful cat, and I’m actively
               involved in AKC Conformation Showing.
             </p>
 
