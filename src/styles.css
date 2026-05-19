@@ -1357,7 +1357,7 @@ img { max-width: 100%; display: block; }
 
 /* Pricing page */
 .pricing-section {
-  padding: 72px 0 80px;
+  padding: 24px 0 64px;
   background: var(--white);
 }
 
