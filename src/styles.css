@@ -340,7 +340,7 @@ img { max-width: 100%; display: block; }
 .logo-tagline {
   font-size: .65rem;
   color: var(--gray);
-  letter-spacing: .305em;
+  letter-spacing: .083em;
   text-transform: uppercase;
 }
 
