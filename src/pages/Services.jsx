@@ -43,7 +43,7 @@ export default function Services() {
         <div className="container">
           <span className="section-label">Our Services</span>
           <h1 className="page-title">Gentle Grooming, Tailored to Your Pup</h1>
-          <p className="page-lede">
+          <p className="page-lede" style={{ maxWidth: 720 }}>
             Every visit is unhurried, one-on-one, and designed around your dog's
             individual needs.<br />Here's what we offer.
           </p>
