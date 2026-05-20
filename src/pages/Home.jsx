@@ -77,7 +77,7 @@ function Services() {
     <section className="services">
       <div className="container">
         <div className="section-header">
-          <span className="section-label">What We Offer</span>
+          <span className="section-label">What I Offer</span>
           <h2 className="section-title">Our Grooming Services</h2>
           <p className="section-subtitle">Gentle care, beautiful results.</p>
         </div>
