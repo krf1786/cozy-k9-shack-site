@@ -1,13 +1,37 @@
 import { useState } from 'react'
 
+// Encodes form fields the way Netlify Forms expects (application/x-www-form-urlencoded)
+const encode = (data) =>
+  Object.keys(data)
+    .map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(data[k]))
+    .join('&')
+
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState(false)
+  const [sending, setSending] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // No backend wired up — this just acknowledges in the UI.
-    // TODO: connect form to a real handler (Formspree, Netlify Forms, etc.)
-    setSubmitted(true)
+    setError(false)
+    setSending(true)
+
+    const form = e.target
+    const data = new FormData(form)
+    const payload = {}
+    data.forEach((value, key) => { payload[key] = value })
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encode({ 'form-name': 'booking', ...payload }),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Submission failed')
+        setSubmitted(true)
+      })
+      .catch(() => setError(true))
+      .finally(() => setSending(false))
   }
 
   return (
@@ -98,7 +122,23 @@ export default function Contact() {
                 </p>
               </div>
             ) : (
-              <form className="contact-form" onSubmit={handleSubmit}>
+              <form
+                className="contact-form"
+                name="booking"
+                method="POST"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+                onSubmit={handleSubmit}
+              >
+                {/* Netlify needs this hidden field to route the submission */}
+                <input type="hidden" name="form-name" value="booking" />
+                {/* Honeypot — hidden from people, catches spam bots */}
+                <p hidden>
+                  <label>
+                    Don't fill this out: <input name="bot-field" />
+                  </label>
+                </p>
+
                 <div className="form-row">
                   <label>
                     Your Name
@@ -136,8 +176,20 @@ export default function Contact() {
                   />
                 </label>
 
-                <button type="submit" className="btn btn-sage" style={{ alignSelf: 'flex-start' }}>
-                  Send Message
+                {error && (
+                  <p style={{ color: 'var(--blush-dark)', fontSize: '.88rem', margin: 0 }}>
+                    Something went wrong sending your message. Please try again, or
+                    call me at <a href="tel:2019626176">201.962.6176</a>.
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  className="btn btn-sage"
+                  style={{ alignSelf: 'flex-start' }}
+                  disabled={sending}
+                >
+                  {sending ? 'Sending…' : 'Send Message'}
                 </button>
               </form>
             )}

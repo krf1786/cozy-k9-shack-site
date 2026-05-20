@@ -1,6 +1,6 @@
 export default function CtaBanner({
   title = "Ready to Book Your Pup's Next Groom?",
-  text = "Give us a call or send an email — we'd love to welcome your dog to the family.",
+  text = "Give me a call or send an email — I'd love to welcome your dog to the family.",
 }) {
   return (
     <section className="cta-banner">
