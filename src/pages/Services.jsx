@@ -22,7 +22,7 @@ const services = [
   {
     icon: '✂️',
     title: 'Haircuts & Styling',
-    desc: 'Breed-specific cuts or custom styling tailored to your dog\'s coat type, lifestyle, and your personal preferences. From puppy cuts to teddy bear faces — we get the details right.',
+    desc: 'Breed-specific cuts or custom styling tailored to your dog\'s coat type, lifestyle, and your personal preferences. From puppy cuts to teddy bear faces — I get the details right.',
   },
   {
     icon: '🐾',
@@ -41,11 +41,11 @@ export default function Services() {
     <>
       <section className="page-hero">
         <div className="container">
-          <span className="section-label">Our Services</span>
+          <span className="section-label">My Services</span>
           <h1 className="page-title">Gentle Grooming, Tailored to Your Pup</h1>
           <p className="page-lede" style={{ maxWidth: 720 }}>
             Every visit is unhurried, one-on-one, and designed around your dog's
-            individual needs.<br />Here's what we offer.
+            individual needs.<br />Here's what I offer.
           </p>
         </div>
       </section>
