@@ -38,7 +38,7 @@ function Hero() {
           </p>
 
           <div className="hero-btns">
-            <a href="tel:2019626176" className="btn btn-sage">📞 Book Now</a>
+            <Link to="/contact" className="btn btn-sage">📞 Book Now</Link>
             <Link to="/services" className="btn btn-light">Learn More</Link>
           </div>
 

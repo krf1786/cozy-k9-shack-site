@@ -34,7 +34,7 @@ export default function Header() {
               {l.label}
             </NavLink>
           ))}
-          <a href="tel:2019626176" className="nav-book">🐾 Book Appointment</a>
+          <Link to="/contact" className="nav-book">🐾 Book Appointment</Link>
         </nav>
 
         <button
@@ -53,14 +53,14 @@ export default function Header() {
             {l.label}
           </NavLink>
         ))}
-        <a
-          href="tel:2019626176"
+        <Link
+          to="/contact"
           className="btn btn-blush"
           style={{ marginTop: 12, justifyContent: 'center' }}
           onClick={() => setOpen(false)}
         >
           Book Appointment
-        </a>
+        </Link>
       </nav>
     </header>
   )
