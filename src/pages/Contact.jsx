@@ -1,10 +1,6 @@
 import { useState } from 'react'
 
-// Encodes form fields the way Netlify Forms expects (application/x-www-form-urlencoded)
-const encode = (data) =>
-  Object.keys(data)
-    .map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(data[k]))
-    .join('&')
+const WEB3FORMS_KEY = 'f7cdcb3b-7af4-4c4c-986c-db5c3ecd8a08'
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false)
@@ -18,17 +14,18 @@ export default function Contact() {
 
     const form = e.target
     const data = new FormData(form)
-    const payload = {}
-    data.forEach((value, key) => { payload[key] = value })
+    const payload = { access_key: WEB3FORMS_KEY }
+    data.forEach((value, key) => { if (key !== 'botcheck') payload[key] = value })
 
-    fetch('/', {
+    fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'booking', ...payload }),
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload),
     })
-      .then((res) => {
-        if (!res.ok) throw new Error('Submission failed')
-        setSubmitted(true)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) setSubmitted(true)
+        else throw new Error('Submission failed')
       })
       .catch(() => setError(true))
       .finally(() => setSending(false))
@@ -124,20 +121,10 @@ export default function Contact() {
             ) : (
               <form
                 className="contact-form"
-                name="booking"
-                method="POST"
-                data-netlify="true"
-                netlify-honeypot="bot-field"
                 onSubmit={handleSubmit}
               >
-                {/* Netlify needs this hidden field to route the submission */}
-                <input type="hidden" name="form-name" value="booking" />
-                {/* Honeypot — hidden from people, catches spam bots */}
-                <p hidden>
-                  <label>
-                    Don't fill this out: <input name="bot-field" />
-                  </label>
-                </p>
+                {/* Honeypot — catches spam bots */}
+                <input type="checkbox" name="botcheck" style={{ display: 'none' }} />
 
                 <div className="form-row">
                   <label>

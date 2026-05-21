@@ -13,21 +13,6 @@
   <body>
     <div id="root"></div>
 
-    <!--
-      Hidden static form so Netlify can detect the "booking" form at build
-      time. The real form lives in the React app (src/pages/Contact.jsx),
-      which JS-renders after build and is invisible to Netlify's scanner.
-      Field names here must match the React form exactly.
-    -->
-    <form name="booking" netlify netlify-honeypot="bot-field" hidden>
-      <input type="text" name="name" />
-      <input type="tel" name="phone" />
-      <input type="email" name="email" />
-      <input type="text" name="dogName" />
-      <input type="text" name="dogBreed" />
-      <textarea name="message"></textarea>
-    </form>
-
-    <script type="module" src="/src/main.jsx"></script>
+<script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
