@@ -1,0 +1,8 @@
+{
+  "name": "cozy-k9-shack-site",
+  "compatibility_date": "2025-05-20",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
+}
