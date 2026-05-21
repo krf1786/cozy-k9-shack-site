@@ -552,6 +552,8 @@ img { max-width: 100%; display: block; }
 .hero-slideshow {
   display: grid;
   grid-template-areas: "stack";
+  width: 100%;
+  height: 100%;
 }
 
 .hero-slide {
