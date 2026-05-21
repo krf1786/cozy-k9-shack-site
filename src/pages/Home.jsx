@@ -1,4 +1,46 @@
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+
+const slides = [
+  { src: '/photo1-before.jpg', label: 'Before', alt: 'Dog before grooming 1' },
+  { src: '/photo1-after.jpg',  label: 'After',  alt: 'Dog after grooming 1' },
+  { src: '/photo2-before.jpg', label: 'Before', alt: 'Dog before grooming 2' },
+  { src: '/photo2-after.jpg',  label: 'After',  alt: 'Dog after grooming 2' },
+  { src: '/photo3-before.jpg', label: 'Before', alt: 'Dog before grooming 3' },
+  { src: '/photo3-after.jpg',  label: 'After',  alt: 'Dog after grooming 3' },
+]
+
+function HeroSlideshow() {
+  const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((c) => (c + 1) % slides.length)
+    }, 3500)
+    return () => clearInterval(timer)
+  }, [])
+
+  return (
+    <div className="hero-slideshow" style={{ position: 'relative' }}>
+      {slides.map((slide, i) => (
+        <div key={i} className={`hero-slide${i === current ? ' is-active' : ''}`} style={{ position: 'relative' }}>
+          <img src={slide.src} alt={slide.alt} className="hero-dog-photo" />
+          <span className="hero-slide-label">{slide.label}</span>
+        </div>
+      ))}
+      <div className="hero-slide-dots">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            className={`hero-slide-dot${i === current ? ' is-active' : ''}`}
+            onClick={() => setCurrent(i)}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
 
 const services = [
   { icon: '🛁', title: 'Bath & Brush', desc: "Relaxing bath, gentle shampoo, conditioning, blow-dry and brush-out." },
@@ -60,7 +102,7 @@ function Hero() {
 
         <div className="hero-image-wrap">
           <div className="hero-image-frame">
-            <img src="/hero-dog.png" alt="Happy groomed dog" className="hero-dog-photo" />
+            <HeroSlideshow />
           </div>
           <div className="hero-badge-card" aria-hidden="true">
             <div className="hero-badge-card-icon">🐾</div>
