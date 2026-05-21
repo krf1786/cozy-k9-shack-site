@@ -124,7 +124,7 @@ function AboutPreview() {
         <div>
           <div className="about-img-wrap">
             <img
-              src="/jaclyn-photo.jpeg"
+              src="/hero-dog.png"
               alt="Jaclyn Rischman, Owner and Pet Groomer at Cozy K9 Shack"
               className="about-img"
             />
