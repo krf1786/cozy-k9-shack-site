@@ -549,6 +549,12 @@ img { max-width: 100%; display: block; }
   display: block;
 }
 
+/* Before/After photos: fill the frame, crop the wall area at top */
+.hero-dog-photo.hero-slide-cover {
+  object-fit: cover;
+  object-position: center 75%;
+}
+
 /* Slideshow — slides stacked via CSS grid, crossfaded via opacity */
 .hero-slideshow {
   display: grid;

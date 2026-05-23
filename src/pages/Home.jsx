@@ -25,7 +25,11 @@ function HeroSlideshow() {
     <div className="hero-slideshow" style={{ position: 'relative' }}>
       {slides.map((slide, i) => (
         <div key={i} className={`hero-slide${i === current ? ' is-active' : ''}`} style={{ position: 'relative' }}>
-          <img src={slide.src} alt={slide.alt} className="hero-dog-photo" />
+          <img
+            src={slide.src}
+            alt={slide.alt}
+            className={`hero-dog-photo${slide.label ? ' hero-slide-cover' : ''}`}
+          />
           {slide.label && <span className="hero-slide-label">{slide.label}</span>}
         </div>
       ))}
