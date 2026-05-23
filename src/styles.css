@@ -632,7 +632,7 @@ img { max-width: 100%; display: block; }
 
 .hero-badge-card {
   position: absolute;
-  top: -18px;
+  bottom: -18px;
   right: -10px;
   background: var(--white);
   border-radius: 12px;

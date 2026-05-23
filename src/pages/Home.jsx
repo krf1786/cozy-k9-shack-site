@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 const slides = [
+  { src: '/hero-dog.png',      label: '',       alt: 'Happy groomed dog' },
   { src: '/photo1-before.jpg', label: 'Before', alt: 'Dog before grooming 1' },
   { src: '/photo1-after.jpg',  label: 'After',  alt: 'Dog after grooming 1' },
   { src: '/photo2-before.jpg', label: 'Before', alt: 'Dog before grooming 2' },
@@ -25,7 +26,7 @@ function HeroSlideshow() {
       {slides.map((slide, i) => (
         <div key={i} className={`hero-slide${i === current ? ' is-active' : ''}`} style={{ position: 'relative' }}>
           <img src={slide.src} alt={slide.alt} className="hero-dog-photo" />
-          <span className="hero-slide-label">{slide.label}</span>
+          {slide.label && <span className="hero-slide-label">{slide.label}</span>}
         </div>
       ))}
       <div className="hero-slide-dots">
