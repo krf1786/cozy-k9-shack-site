@@ -1040,8 +1040,8 @@ img { max-width: 100%; display: block; }
 }
 
 .footer-logo-badge {
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   background: var(--white);
   object-fit: contain;
