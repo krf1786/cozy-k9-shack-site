@@ -9,6 +9,8 @@ const slides = [
   { src: '/photo2-after.jpg',  label: 'After',  alt: 'Dog after grooming 2' },
   { src: '/photo3-before.jpg', label: 'Before', alt: 'Dog before grooming 3' },
   { src: '/photo3-after.jpg',  label: 'After',  alt: 'Dog after grooming 3' },
+  { src: '/photo4.jpg',        label: '',       alt: 'Freshly groomed dog in a blue bandana' },
+  { src: '/photo5.jpg',        label: '',       alt: 'Freshly groomed dog in a pink bandana' },
 ]
 
 function HeroSlideshow() {
@@ -25,7 +27,7 @@ function HeroSlideshow() {
     <div className="hero-slideshow" style={{ position: 'relative' }}>
       {slides.map((slide, i) => (
         <div key={i} className={`hero-slide${i === current ? ' is-active' : ''}`} style={{ position: 'relative' }}>
-          <img src={slide.src} alt={slide.alt} className="hero-dog-photo" style={i > 0 ? { objectPosition: 'center 30%' } : {}} />
+          <img src={slide.src} alt={slide.alt} className="hero-dog-photo" style={slide.label ? { objectPosition: 'center 30%' } : {}} />
           {slide.label && <span className="hero-slide-label">{slide.label}</span>}
         </div>
       ))}
