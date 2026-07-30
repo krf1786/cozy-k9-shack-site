@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import photo4 from '../assets/showcase/photo4.jpg'
+import photo5 from '../assets/showcase/photo5.jpg'
 
 const slides = [
   { src: '/hero-dog.png',      label: '',       alt: 'Happy groomed dog' },
@@ -9,8 +11,8 @@ const slides = [
   { src: '/photo2-after.jpg',  label: 'After',  alt: 'Dog after grooming 2' },
   { src: '/photo3-before.jpg', label: 'Before', alt: 'Dog before grooming 3' },
   { src: '/photo3-after.jpg',  label: 'After',  alt: 'Dog after grooming 3' },
-  { src: '/photo4.jpg',        label: '',       alt: 'Freshly groomed dog in a blue bandana' },
-  { src: '/photo5.jpg',        label: '',       alt: 'Freshly groomed dog in a pink bandana' },
+  { src: photo4,               label: '',       alt: 'Freshly groomed dog in a blue bandana' },
+  { src: photo5,               label: '',       alt: 'Freshly groomed dog in a pink bandana' },
 ]
 
 function HeroSlideshow() {

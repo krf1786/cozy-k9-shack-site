@@ -11,6 +11,7 @@ import Services from './pages/Services.jsx'
 import About    from './pages/About.jsx'
 import Pricing  from './pages/Pricing.jsx'
 import Contact  from './pages/Contact.jsx'
+import Showcase from './pages/Showcase.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -32,6 +33,7 @@ function Layout() {
           <Route path="/services" element={<Services />} />
           <Route path="/about"    element={<About />} />
           <Route path="/pricing"  element={<Pricing />} />
+          <Route path="/showcase" element={<Showcase />} />
           <Route path="/contact"  element={<Contact />} />
           <Route path="*"         element={<Home />} />
         </Routes>
