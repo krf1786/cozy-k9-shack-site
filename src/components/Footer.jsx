@@ -76,7 +76,10 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} Cozy K9 Shack. All rights reserved.</span>
-          <span>Mount Holly, NC · In-Home Pet Grooming</span>
+          <span>
+            Mount Holly, NC · In-Home Pet Grooming{' '}
+            <Link to="/upload" className="footer-upload-link" aria-label="Owner photo upload">📷</Link>
+          </span>
         </div>
       </div>
     </footer>

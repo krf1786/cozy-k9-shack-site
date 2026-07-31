@@ -1,8 +1,10 @@
 {
   "name": "cozy-k9-shack-site",
   "compatibility_date": "2025-05-20",
+  "main": "worker/index.js",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     "not_found_handling": "single-page-application"
   }
 }

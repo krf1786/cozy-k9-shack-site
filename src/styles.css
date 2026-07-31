@@ -1693,3 +1693,73 @@ a.contact-info-value:hover { color: var(--sage-deep); }
 @media (max-width: 480px) {
   .showcase-grid { grid-template-columns: 1fr; }
 }
+
+/* ── Upload (hidden owner page) ───────────────────────────── */
+.upload-page { padding: 72px 0 88px; background: var(--cream); }
+
+.upload-page .section-header { text-align: center; margin-bottom: 32px; }
+
+.upload-field {
+  display: block;
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 16px;
+}
+
+.upload-field input {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 11px 14px;
+  border: 1px solid var(--gray-light);
+  border-radius: 10px;
+  font: inherit;
+}
+
+.upload-choose { width: 100%; justify-content: center; }
+
+.upload-hint {
+  margin-top: 14px;
+  font-size: .88rem;
+  color: var(--gray);
+  text-align: center;
+}
+
+.upload-list {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.upload-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--white);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: .88rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.upload-item-name {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 45%;
+}
+
+.upload-item-note { color: var(--gray); margin-left: auto; }
+.upload-item.is-error .upload-item-note { color: var(--blush-dark); }
+
+.footer-upload-link {
+  opacity: .35;
+  text-decoration: none;
+  margin-left: 6px;
+}
+.footer-upload-link:hover { opacity: 1; }

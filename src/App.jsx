@@ -12,6 +12,7 @@ import About    from './pages/About.jsx'
 import Pricing  from './pages/Pricing.jsx'
 import Contact  from './pages/Contact.jsx'
 import Showcase from './pages/Showcase.jsx'
+import Upload   from './pages/Upload.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -35,6 +36,7 @@ function Layout() {
           <Route path="/pricing"  element={<Pricing />} />
           <Route path="/showcase" element={<Showcase />} />
           <Route path="/contact"  element={<Contact />} />
+          <Route path="/upload"   element={<Upload />} />
           <Route path="*"         element={<Home />} />
         </Routes>
         {!hideCta && <CtaBanner />}

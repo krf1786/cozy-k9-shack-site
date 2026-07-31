@@ -137,14 +137,44 @@ public/                  # Served as-is at site root
 
 ---
 
+## Owner photo uploads (the /upload page)
+
+Jaclyn can add Showcase photos herself — no developer needed:
+
+1. Go to **cozyk9shack.com/upload** (hidden page; also reachable via the faint
+   📷 icon at the bottom of the footer).
+2. Enter the upload password, tap **Choose Photos**, pick one or more.
+3. Each photo is resized/compressed *in the browser* (1500px wide, JPEG 82%,
+   orientation fixed), then sent to the site's Worker, which commits it to
+   this repo as the next `photoN.jpg`. That push triggers the normal
+   Cloudflare build — photos appear on the Showcase page in ~2 minutes.
+
+The server side lives in [`worker/index.js`](worker/index.js) (the
+`/api/upload` endpoint). It needs two **secrets**, set in Cloudflare dashboard
+→ Workers & Pages → cozy-k9-shack-site → Settings → Variables and Secrets:
+
+- `GITHUB_TOKEN` — fine-grained GitHub personal access token scoped to this
+  repo only, with **Contents: Read and write** permission
+  (github.com → Settings → Developer settings → Fine-grained tokens). Note
+  the expiry date you pick — uploads stop working when it lapses and it must
+  be re-issued.
+- `UPLOAD_PASSWORD` — any password you choose; give it to Jaclyn.
+
+Until both secrets are set, the upload page returns "Uploads are not
+configured yet." For local testing, put the same two values in a `.dev.vars`
+file (gitignored) and run `npm run build && npx wrangler dev`.
+
+---
+
 ## Common content edits
 
-**Add photos to the Showcase page** — drop image files (`.jpg`, `.jpeg`,
-`.png`, `.webp`, `.gif`) into `src/assets/showcase/`, commit, push. Every
-photo in that folder appears automatically, sorted by filename
-(`photo4 … photo19` currently). A filename containing "before" or "after"
-(e.g. `bella-before.jpg`) gets a Before/After label. Please resize photos to
-~1500px on the long edge first — phone originals are 4–6 MB and slow the page.
+**Add photos to the Showcase page** — use the /upload page above, or by hand:
+drop image files (`.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`) into
+`src/assets/showcase/`, commit, push. Every photo in that folder appears
+automatically, sorted by filename (`photo4 … photo19` currently). A filename
+containing "before" or "after" (e.g. `bella-before.jpg`) gets a Before/After
+label. Resize photos to ~1500px on the long edge first — phone originals are
+4–6 MB and slow the page.
 
 **Change the hero slideshow** — edit the `slides` array at the top of
 `src/pages/Home.jsx`. Slides with a `label` get the Before/After pill and are
