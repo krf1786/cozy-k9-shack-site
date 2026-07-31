@@ -57,7 +57,6 @@ export default function Header() {
         <Link
           to="/contact"
           className="btn btn-blush"
-          style={{ marginTop: 12, justifyContent: 'center' }}
           onClick={() => setOpen(false)}
         >
           Book Appointment

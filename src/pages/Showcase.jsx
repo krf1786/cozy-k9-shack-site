@@ -49,7 +49,7 @@ export default function Showcase() {
           <span className="section-label">Fresh Cuts &amp; Happy Tails</span>
           <h2 className="section-title">Showcase</h2>
           <p className="section-subtitle">
-            A few of the wonderful pups who've visited the Cozy K9 Shack.
+            A few of the wonderful pups who have visited the Cozy K9 Shack.
           </p>
         </div>
 
