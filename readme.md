@@ -17,14 +17,18 @@ administer the site is written down here.
 | Service | What it does | Account |
 |---|---|---|
 | **GitHub** | Source code, deploy trigger | `krf1786/cozy-k9-shack-site` |
-| **Cloudflare** | Hosting (Workers) + DNS | krf1786@gmail.com |
+| **Hostinger VPS** | Hosting — runs the Node server (see below) | krf1786's Hostinger account |
+| **Cloudflare** | DNS only (proxied in front of the VPS) | krf1786@gmail.com |
 | **Network Solutions** | Domain registrar for cozyk9shack.com | (renewals happen here) |
 | **Google Workspace** | Email — jaclyn@cozyk9shack.com | admin via Network Solutions purchase |
 | **Web3Forms** | Contact form → email delivery | free plan, 250 submissions/month |
 
 The domain is **registered** at Network Solutions, but its **nameservers point
 to Cloudflare**, so all DNS changes are made in the Cloudflare dashboard —
-changes made in Network Solutions' DNS panel have no effect.
+changes made in Network Solutions' DNS panel have no effect. Cloudflare no
+longer hosts the site itself (that moved to the Hostinger VPS below); it's
+kept purely as the DNS/CDN layer in front of it, proxying (orange-cloud)
+`cozyk9shack.com` and `www` to the VPS's IP.
 
 ---
 
@@ -44,41 +48,51 @@ npm run preview    # preview the production build
 
 ---
 
-## Hosting & deployment (Cloudflare Workers)
+## Hosting & deployment (Hostinger VPS)
 
-The site deploys as a **Cloudflare Worker serving static assets** — config in
-[`wrangler.jsonc`](wrangler.jsonc):
+The site used to deploy as a Cloudflare Worker (`wrangler.jsonc` and
+`worker/index.js` are kept in the repo for reference / rollback, but are no
+longer used). It now runs as a plain **Node/Express server on a Hostinger
+VPS**, with Cloudflare in front purely for DNS + proxying:
 
-- `assets.directory: ./dist` — serves the Vite build output
-- `not_found_handling: "single-page-application"` — all unknown paths serve
-  `index.html` so React Router handles routing (do **not** add a `_redirects`
-  file; that's a Netlify concept and caused an infinite-loop deploy failure)
+- [`server/index.js`](server/index.js) serves the Vite build (`dist/`) as a
+  single-page app (unknown paths fall back to `index.html`, same behavior as
+  the old Worker's `single-page-application` setting) and handles the
+  `/api/upload` endpoint (see below).
+- [`deploy/nginx.conf`](deploy/nginx.conf) — Nginx reverse-proxies HTTPS
+  traffic to the Node server on `127.0.0.1:3000`.
+- [`deploy/ecosystem.config.cjs`](deploy/ecosystem.config.cjs) — pm2 keeps
+  the Node process alive and restarts it on crash/reboot.
+- [`deploy/deploy.sh`](deploy/deploy.sh) — pulls, installs, builds, and
+  reloads on the VPS. Run it by hand over SSH, or let
+  [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) run it
+  automatically on every push to `main` (needs SSH secrets added to the repo
+  first — see comments in that file).
 
-**Deploys are automatic.** The Cloudflare project is connected to the GitHub
-repo: every push to `main` triggers a build (`npm run build`) and deploy
-(`npx wrangler deploy`). A deploy takes about a minute. There is no staging
-environment — `main` is production.
-
-Manual deploy, if ever needed:
+Manual deploy, from the VPS:
 
 ```bash
-npm run build && npx wrangler deploy
+cd ~/cozy-k9-shack-site
+./deploy/deploy.sh
 ```
 
 ### DNS records (managed in Cloudflare)
 
 | Type | Name | Value | Purpose |
 |---|---|---|---|
-| Worker | cozyk9shack.com | cozy-k9-shack-site | site (custom domain) |
-| Worker | www | cozy-k9-shack-site | site (custom domain) |
+| A | cozyk9shack.com | *VPS IP address* (proxied, orange cloud) | site |
+| CNAME | www | cozyk9shack.com (proxied, orange cloud) | site |
 | MX | @ | aspmx.l.google.com (pri 1) | Google Workspace mail |
 | MX | @ | alt1/alt2.aspmx.l.google.com (pri 5) | Google Workspace mail |
 | MX | @ | alt3/alt4.aspmx.l.google.com (pri 10) | Google Workspace mail |
 | TXT | @ | `v=spf1 include:_spf.google.com ~all` | SPF for outgoing mail |
 
-If the site ever moves hosts: delete the two Worker custom-domain records and
-point A/CNAME records at the new host. Leave the MX/TXT records alone or email
-breaks.
+SSL/TLS mode in Cloudflare is set to **Full (strict)** — the VPS presents a
+free Cloudflare Origin Certificate (15-year validity, no renewal cron
+needed; see comments in `deploy/nginx.conf` for where it goes).
+
+If the site ever moves hosts again: update the A/CNAME records above to point
+at the new host. Leave the MX/TXT records alone or email breaks.
 
 ---
 
@@ -114,8 +128,6 @@ src/
 ├── App.jsx              # Router & layout (add new routes here)
 ├── main.jsx             # React entry
 ├── styles.css           # ALL styling, incl. responsive breakpoints
-├── assets/
-│   └── showcase/        # Showcase photos — drop new photos here
 ├── components/
 │   ├── Header.jsx       # Nav links defined once here, shared with Footer
 │   ├── Footer.jsx
@@ -125,14 +137,31 @@ src/
     ├── Services.jsx
     ├── About.jsx
     ├── Pricing.jsx      # Price tables are plain arrays at top of file
-    ├── Showcase.jsx     # Auto-loads every image in assets/showcase/
+    ├── Showcase.jsx     # Fetches public/gallery/manifest.json at runtime
+    ├── Upload.jsx       # The hidden /upload page
     └── Contact.jsx      # Web3Forms integration
 
 public/                  # Served as-is at site root
 ├── logo.jpg / logo.png  # Circular logo (header/footer + favicon)
 ├── hero-dog.png         # Slide 1 of the hero slideshow
 ├── photo1..3-before/after.jpg   # Hero slideshow before/after pairs
-└── jaclyn-photo.jpeg    # Owner photo (About page)
+├── jaclyn-photo.jpeg    # Owner photo (About page)
+└── gallery/             # Showcase photos + manifest.json — drop new
+                          # photos here (URL path /gallery/, kept distinct
+                          # from the /showcase page route)
+
+server/
+└── index.js             # Node/Express server (see Hosting section above)
+
+scripts/
+├── showcase-manifest.mjs         # Shared manifest read/write logic
+└── build-showcase-manifest.mjs   # Regenerates the manifest (predev/prebuild)
+
+deploy/                   # Nginx config, pm2 config, redeploy script — see
+                          # Hosting section above
+
+worker/                   # OLD Cloudflare Worker — unused, kept for
+                          # reference only
 ```
 
 ---
@@ -145,36 +174,36 @@ Jaclyn can add Showcase photos herself — no developer needed:
    📷 icon at the bottom of the footer).
 2. Enter the upload password, tap **Choose Photos**, pick one or more.
 3. Each photo is resized/compressed *in the browser* (1500px wide, JPEG 82%,
-   orientation fixed), then sent to the site's Worker, which commits it to
-   this repo as the next `photoN.jpg`. That push triggers the normal
-   Cloudflare build — photos appear on the Showcase page in ~2 minutes.
+   orientation fixed), then sent to the site's Node server, which writes it
+   straight to disk as the next `photoN.jpg` and updates the photo manifest.
+   The VPS has a real, persistent filesystem, so this is immediate — no
+   rebuild, no waiting. It's written to both the live `dist/gallery/` folder
+   (so it shows up right away) and the source `public/gallery/` folder (so
+   it isn't lost on the next deploy).
 
-The server side lives in [`worker/index.js`](worker/index.js) (the
-`/api/upload` endpoint). It needs two **secrets**, set in Cloudflare dashboard
-→ Workers & Pages → cozy-k9-shack-site → Settings → Variables and Secrets:
+The server side lives in [`server/index.js`](server/index.js) (the
+`/api/upload` endpoint) and [`scripts/showcase-manifest.mjs`](scripts/showcase-manifest.mjs)
+(the manifest logic it shares with the build step). It needs one setting, in
+a `.env` file on the VPS (gitignored — see `.env.example`):
 
-- `GITHUB_TOKEN` — fine-grained GitHub personal access token scoped to this
-  repo only, with **Contents: Read and write** permission
-  (github.com → Settings → Developer settings → Fine-grained tokens). Note
-  the expiry date you pick — uploads stop working when it lapses and it must
-  be re-issued.
 - `UPLOAD_PASSWORD` — any password you choose; give it to Jaclyn.
 
-Until both secrets are set, the upload page returns "Uploads are not
-configured yet." For local testing, put the same two values in a `.dev.vars`
-file (gitignored) and run `npm run build && npx wrangler dev`.
+Until it's set, the upload page returns "Uploads are not configured yet."
+For local testing, copy `.env.example` to `.env`, fill it in, and run
+`npm run build && npm start`.
 
 ---
 
 ## Common content edits
 
-**Add photos to the Showcase page** — use the /upload page above, or by hand:
-drop image files (`.jpg`, `.jpeg`, `.png`, `.webp`, `.gif`) into
-`src/assets/showcase/`, commit, push. Every photo in that folder appears
-automatically, sorted by filename (`photo4 … photo19` currently). A filename
-containing "before" or "after" (e.g. `bella-before.jpg`) gets a Before/After
-label. Resize photos to ~1500px on the long edge first — phone originals are
-4–6 MB and slow the page.
+**Add photos to the Showcase page** — use the /upload page above (instant,
+no rebuild), or by hand: drop image files (`.jpg`, `.jpeg`, `.png`, `.webp`,
+`.gif`) into `public/gallery/`, then run `npm run dev` or `npm run build`
+locally to regenerate `manifest.json`, and commit/push both. Every photo in
+that folder appears automatically, sorted by filename. A filename containing
+"before" or "after" (e.g. `bella-before.jpg`) gets a Before/After label.
+Resize photos to ~1500px on the long edge first — phone originals are 4–6 MB
+and slow the page.
 
 **Change the hero slideshow** — edit the `slides` array at the top of
 `src/pages/Home.jsx`. Slides with a `label` get the Before/After pill and are

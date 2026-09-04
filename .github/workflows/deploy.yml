@@ -1,0 +1,36 @@
+# Optional auto-deploy: on every push to main, SSH into the VPS and run
+# deploy/deploy.sh (git pull, npm ci, build, pm2 reload).
+#
+# To enable, add these repo secrets (GitHub → Settings → Secrets and
+# variables → Actions):
+#   VPS_HOST        the VPS's IP address or hostname
+#   VPS_USER        the SSH user (e.g. deploy, or root)
+#   VPS_SSH_KEY     private key that matches a public key already in
+#                   ~/.ssh/authorized_keys for that user on the VPS
+#   VPS_PORT        SSH port (optional, defaults to 22)
+#
+# If these secrets aren't set, just delete this file and run
+# deploy/deploy.sh by hand over SSH after each push instead — nothing
+# else depends on this workflow existing.
+
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH and deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          script: |
+            cd ~/cozy-k9-shack-site
+            ./deploy/deploy.sh

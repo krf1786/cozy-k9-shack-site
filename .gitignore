@@ -7,3 +7,4 @@ dist
 .vite
 .claude/
 .dev.vars
+public/gallery/manifest.json

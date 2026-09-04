@@ -158,8 +158,8 @@ export default function Upload() {
 
         {anyDone && (
           <p className="upload-hint">
-            All set! The site rebuilds itself — new photos show up on the
-            Showcase page in about two minutes.
+            All set! New photos show up on the Showcase page immediately —
+            no waiting.
           </p>
         )}
       </div>
