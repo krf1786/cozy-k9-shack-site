@@ -44,7 +44,7 @@ const sizes = [
 ]
 
 const addons = [
-  { name: 'Nail Dremel',     price: '$15', time: '5 min',  note: 'Standalone visit' },
+  { name: 'Nail Dremel',     price: '$15 & Up', time: '5 min',  note: 'Standalone visit' },
   { name: 'Teeth Brushing',  price: 'Ask', time: '—',      note: 'Available on request' },
   { name: 'Ear Plucking',    price: 'Ask', time: '—',      note: 'Available on request' },
   { name: 'Gland Expression',price: 'Ask', time: '—',      note: 'Available on request' },
@@ -88,13 +88,13 @@ export default function Pricing() {
                     <td>{s.weight}</td>
                     <td>
                       <div className="price-cell">
-                        <span className="price">{s.bath.price}</span>
+                        <span className="price">{s.bath.price} &amp; Up</span>
                         <span className="duration">{s.bath.time}</span>
                       </div>
                     </td>
                     <td>
                       <div className="price-cell">
-                        <span className="price">{s.haircut.price}</span>
+                        <span className="price">{s.haircut.price} &amp; Up</span>
                         <span className="duration">{s.haircut.time}</span>
                       </div>
                     </td>
