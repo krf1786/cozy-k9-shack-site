@@ -15,7 +15,7 @@ const sizes = [
     name: 'Small',
     weight: '16–30 lbs',
     bath:    { price: '$50',  time: '1 hour' },
-    haircut: { price: '$85',  time: '1 hr 30 min' },
+    haircut: { price: '$95',  time: '1 hr 30 min' },
   },
   {
     key: 'md',
@@ -39,12 +39,12 @@ const sizes = [
     name: 'Extra Large',
     weight: '81+ lbs',
     bath:    { price: '$90',  time: '2 hr 30 min' },
-    haircut: { price: '$130', time: '3 hours' },
+    haircut: { price: '$160', time: '3 hours' },
   },
 ]
 
 const addons = [
-  { name: 'Nail Dremel',     price: '$10', time: '5 min',  note: 'Standalone visit' },
+  { name: 'Nail Dremel',     price: '$15', time: '5 min',  note: 'Standalone visit' },
   { name: 'Teeth Brushing',  price: 'Ask', time: '—',      note: 'Available on request' },
   { name: 'Ear Plucking',    price: 'Ask', time: '—',      note: 'Available on request' },
   { name: 'Gland Expression',price: 'Ask', time: '—',      note: 'Available on request' },
